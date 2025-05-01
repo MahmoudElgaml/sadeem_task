@@ -1,5 +1,6 @@
 class EndPoints{
 
-  static const baseUrl="/";
+  static const baseUrl="https://dummyjson.com";
+  static const login="/auth/login";
 
 }

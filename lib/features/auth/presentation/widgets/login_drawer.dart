@@ -47,7 +47,7 @@ class LogInDrawer extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  style: AppStyle.style24(context),
+                  style: AppStyle.style18(context),
                   AppString.helpMessage,
                 ),
               ),
