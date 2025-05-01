@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
+import 'package:sadeem_task/core/di/config.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
