@@ -3,8 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sadeem_task/core/cache/storage_token.dart';
 
-
-
 @module
 abstract class DioFactory {
   // Method to provide Dio instance as a singleton
@@ -12,9 +10,10 @@ abstract class DioFactory {
   Dio getDio() {
     const Duration timeOut = Duration(seconds: 30);
 
-    final Dio dio = Dio()
-      ..options.connectTimeout = timeOut
-      ..options.receiveTimeout = timeOut;
+    final Dio dio =
+        Dio()
+          ..options.connectTimeout = timeOut
+          ..options.receiveTimeout = timeOut;
     _addDioInterceptors(dio);
     // _addDioHeader(dio, storageToken);
 
@@ -22,12 +21,14 @@ abstract class DioFactory {
   }
 
   void _addDioInterceptors(Dio dio) {
-    dio.interceptors.add(PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: false,
-    ));
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+      ),
+    );
   }
 
   // void _addDioHeader(Dio dio, StorageToken storageToken) async {
