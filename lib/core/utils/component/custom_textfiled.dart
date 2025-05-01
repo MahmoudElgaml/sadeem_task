@@ -61,24 +61,24 @@ class CustomTextFieldOfEdit extends StatelessWidget {
           enabled: true,
           labelStyle: AppStyle.textSemiBold16(
             context,
-          ).copyWith(color: AppColor.borederColor),
+          ).copyWith(color: AppColor.blackColor),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppColor.borederColor,
+            borderSide:  BorderSide(
+              color: AppColor.greyColor.withOpacity(0.5),
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           border: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppColor.borederColor,
+            borderSide:  BorderSide(
+              color: AppColor.greyColor.withOpacity(0.5),
               width: 20,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppColor.borederColor,
+            borderSide:  BorderSide(
+              color: AppColor.greyColor.withOpacity(0.5),
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),

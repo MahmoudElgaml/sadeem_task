@@ -26,8 +26,8 @@ class ErrorHandler {
   static ErrorModel serverError(int? statusCode, ErrorModel response) {
     switch (statusCode) {
       case 400:
-        return const ErrorModel(
-            message: "Bad request. Please verify your input and try again.");
+        return  ErrorModel(
+            message: "Bad request. ${response.message}");
       case 401:
       case 402:
       case 403:
