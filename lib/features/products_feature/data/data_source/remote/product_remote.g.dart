@@ -24,12 +24,12 @@ class _ProductRemote implements ProductRemote {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<ProductDto>> getProducts() async {
+  Future<ProductDto> getProducts() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ProductDto>>(Options(
+    final _options = _setStreamType<ProductDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,12 +45,10 @@ class _ProductRemote implements ProductRemote {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ProductDto> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProductDto _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => ProductDto.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = ProductDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

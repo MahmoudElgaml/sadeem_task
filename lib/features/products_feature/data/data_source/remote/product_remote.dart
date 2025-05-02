@@ -13,7 +13,7 @@ abstract class ProductRemote {
   factory ProductRemote(Dio dio) = _ProductRemote;
 
   @GET(EndPoints.products)
-  Future<List<ProductDto>> getProducts();
+  Future<ProductDto> getProducts();
 
 }
  
