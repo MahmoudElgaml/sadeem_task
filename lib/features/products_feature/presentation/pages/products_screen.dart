@@ -1,8 +1,11 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
+import 'package:sadeem_task/core/utils/app_color.dart';
+import 'package:sadeem_task/features/products_feature/presentation/cubit/product_cubit.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/product_item.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -18,23 +21,47 @@ class ProductsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 24),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 191 / 249,
-                  ),
-                  itemBuilder:
-                      (context, index) => FittedBox(
-                        child: InkWell(
-                          onTap: () {},
-                          child: const ProductItem(),
-                        ),
+              BlocBuilder<ProductCubit, ProductState>(
+                builder: (context, state) {
+                  if (state is GetProductLoading) {
+                    return Center(
+                      child: LoadingAnimationWidget.fourRotatingDots(
+                        color: AppColor.authColor,
+                        size: 50,
                       ),
-                  itemCount: 20,
-                ),
+                    );
+                  } else if (state is GetProductError) {
+                    return Center(child: Text(state.error));
+                  } else if (state is GetProductSuccess) {
+                    return Expanded(
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 16,
+                              childAspectRatio: 191 / 265,
+                            ),
+                        itemBuilder:
+                            (context, index) => InkWell(
+                              onTap: () {},
+                              child: ProductItem(
+                                productEntity:
+                                    state.productsEntity.products![index],
+                              ),
+                            ),
+                        itemCount: 20,
+                      ),
+                    );
+                  } else {
+                    return Center(
+                      child: LoadingAnimationWidget.fourRotatingDots(
+                        color: AppColor.authColor,
+                        size: 50,
+                      ),
+                    );
+                  }
+                },
               ),
             ],
           ),

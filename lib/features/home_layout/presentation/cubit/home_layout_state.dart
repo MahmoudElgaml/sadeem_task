@@ -8,7 +8,10 @@ sealed class HomeLayoutState {
 final class ProductsScreenState extends HomeLayoutState {
   @override
   Widget getWidget() {
-    return const ProductsScreen();
+    return BlocProvider(
+      create: (context) => getIt<ProductCubit>()..doAction(GetProductsAction()),
+      child: const ProductsScreen(),
+    );
   }
 }
 
