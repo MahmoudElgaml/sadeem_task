@@ -12,5 +12,5 @@ abstract class LoginRemote {
   factory LoginRemote(Dio dio) = _LoginRemote;
 
   @POST(EndPoints.login)
-  Future<LogInResponseDto> login(LoginRequestDto loginRequestDto);
+  Future<LogInResponseDto> login(@Body() LoginRequestDto loginRequestDto);
 }
