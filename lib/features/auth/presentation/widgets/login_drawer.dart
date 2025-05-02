@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
+import 'package:sadeem_task/core/services/validation_service.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_string.dart';
 import 'package:sadeem_task/core/utils/component/custom_textfiled.dart';
@@ -30,6 +31,7 @@ class _LogInDrawerState extends State<LogInDrawer> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   late LoginCubit _loginCubit;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _loginCubit = context.read<LoginCubit>();
@@ -52,62 +54,72 @@ class _LogInDrawerState extends State<LogInDrawer> {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 36, right: 36),
-          child: Column(
-            children: [
-              AuthListenerWidget(),
-              Text("Login", style: AppStyle.style34(context)),
-              const Gap(20),
-              CustomTextFieldOfEdit(
-                controller: _emailController,
-                title: "Email",
-                readOnly: false,
-              ),
-              const Gap(20),
-              CustomTextFieldOfEdit(
-                controller: _passwordController,
-                title: "Password",
-                readOnly: false,
-              ),
-              const Gap(20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  style: AppStyle.style18(context),
-                  AppString.helpMessage,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const AuthListenerWidget(),
+                Text("Login", style: AppStyle.style34(context)),
+                const Gap(20),
+                CustomTextFieldOfEdit(
+                  controller: _emailController,
+                  title: "Username",
+                  readOnly: false,
+                  validator:
+                      (value) =>
+                          ValidationService.validateEmpty(value, "Username"),
                 ),
-              ),
-              const Gap(20),
-              CostumeButton(
-                title: 'Login',
-                onTap: () {
-                  _loginCubit.doAction(
-                    AuthActionLogin(
-                      LoginRequestEntity(
-                        email: _emailController.text,
-                        password: _passwordController.text,
+                const Gap(20),
+                CustomTextFieldOfEdit(
+                  validator:
+                      (p0) => ValidationService.validateEmpty(p0, "Password"),
+                  controller: _passwordController,
+                  title: "Password",
+                  readOnly: false,
+                ),
+                const Gap(20),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    style: AppStyle.style18(context),
+                    AppString.helpMessage,
+                  ),
+                ),
+                const Gap(20),
+                CostumeButton(
+                  title: 'Login',
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      _loginCubit.doAction(
+                        AuthActionLogin(
+                          LoginRequestEntity(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                const Gap(32),
+                Text(style: AppStyle.style18(context), "or Log in With"),
+                const Gap(28),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(style: AppStyle.style18(context), "NewUser? "),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        "Create Account",
+                        style: TextStyle(color: AppColor.authColor),
                       ),
                     ),
-                  );
-                },
-              ),
-              const Gap(32),
-              Text(style: AppStyle.style18(context), "or Log in With"),
-              const Gap(28),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(style: AppStyle.style18(context), "NewUser? "),
-                  InkWell(
-                    onTap: () {},
-                    child: const Text(
-                      "Create Account",
-                      style: TextStyle(color: AppColor.authColor),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

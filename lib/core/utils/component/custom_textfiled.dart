@@ -36,6 +36,7 @@ class CustomTextFieldOfEdit extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: isPadding ? 12.0 : 0),
       child: TextFormField(
+        obscureText: title == "Password" ? true : false,
         keyboardType: textInputType,
         onTap: onTap,
         controller: controller,
@@ -63,21 +64,21 @@ class CustomTextFieldOfEdit extends StatelessWidget {
             context,
           ).copyWith(color: AppColor.blackColor),
           focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(
+            borderSide: BorderSide(
               color: AppColor.greyColor.withOpacity(0.5),
               width: 2,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           border: OutlineInputBorder(
-            borderSide:  BorderSide(
+            borderSide: BorderSide(
               color: AppColor.greyColor.withOpacity(0.5),
               width: 20,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide:  BorderSide(
+            borderSide: BorderSide(
               color: AppColor.greyColor.withOpacity(0.5),
               width: 2,
             ),
