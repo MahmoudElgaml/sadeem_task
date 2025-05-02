@@ -17,6 +17,8 @@ import '../../features/auth/data/repo/login_repo_impl.dart' as _i795;
 import '../../features/auth/domain/repo/login_repo.dart' as _i543;
 import '../../features/auth/domain/use_case/login_use_case.dart' as _i973;
 import '../../features/auth/presentation/cubit/login_cubit.dart' as _i69;
+import '../../features/home_layout/presentation/cubit/home_layout_cubit.dart'
+    as _i579;
 import '../api/dio_factory.dart' as _i1008;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -31,6 +33,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioFactory = _$DioFactory();
+    gh.factory<_i579.HomeLayoutCubit>(() => _i579.HomeLayoutCubit());
     gh.singleton<_i361.Dio>(() => dioFactory.getDio());
     gh.factory<_i77.LoginRemote>(() => _i77.LoginRemote(gh<_i361.Dio>()));
     gh.factory<_i543.LoginRepo>(

@@ -4,6 +4,9 @@ class Assets{
   static const String bubbleTextSign= "assets/images/bubble_text_sign.png";
   static const String productTest= "assets/images/productTest.png";
   static const String iconPlus= "assets/images/iconPlus.svg";
+  static const String productIcon= "assets/images/box.png";
+  static const String cartIcon= "assets/images/shopping-cart.png";
+
 
 
   
