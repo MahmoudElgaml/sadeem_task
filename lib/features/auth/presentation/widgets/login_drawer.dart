@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sadeem_task/config/routes/routes.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_string.dart';
 import 'package:sadeem_task/core/utils/component/custom_textfiled.dart';
+import 'package:sadeem_task/core/utils/component/dialog/dilog_utils.dart';
 import 'package:sadeem_task/features/auth/domain/entites/request/login_request_entity.dart';
 import 'package:sadeem_task/features/auth/presentation/cubit/auth_action.dart';
 import 'package:sadeem_task/features/auth/presentation/cubit/login_cubit.dart';
@@ -52,6 +54,7 @@ class _LogInDrawerState extends State<LogInDrawer> {
           padding: const EdgeInsets.only(top: 30, left: 36, right: 36),
           child: Column(
             children: [
+              AuthListenerWidget(),
               Text("Login", style: AppStyle.style34(context)),
               const Gap(20),
               CustomTextFieldOfEdit(
@@ -108,6 +111,31 @@ class _LogInDrawerState extends State<LogInDrawer> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AuthListenerWidget extends StatelessWidget {
+  const AuthListenerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginLoading) {
+          DialogUtils.showLoadingDialog(context);
+        } else if (state is LoginSuccessState) {
+          context.pop();
+          context.push(AppRoute.homeLayout);
+        } else if (state is LoginFailureState) {
+          context.pop();
+          DialogUtils.showErrorDialog(
+            context,
+            state.errorMessage.message ?? "unknown error",
+          );
+        }
+      },
+      child: const SizedBox(),
     );
   }
 }

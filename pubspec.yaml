@@ -64,6 +64,8 @@ dependencies:
   logger: ^2.5.0 # for logging purpose
   json_annotation: ^4.9.0
   device_preview: ^1.2.0
+  quickalert: ^1.1.0
+  loading_animation_widget: ^1.3.0
   # iOS style icons
   cupertino_icons: ^1.0.8
 
