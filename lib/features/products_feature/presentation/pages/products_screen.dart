@@ -40,12 +40,15 @@ class ProductsScreen extends StatelessWidget {
                               crossAxisCount: 2,
                               mainAxisSpacing: 16,
                               crossAxisSpacing: 16,
-                              childAspectRatio: 191 / 265,
+                              childAspectRatio: 191 / 270,
                             ),
                         itemBuilder:
                             (context, index) => InkWell(
                               onTap: () {
-                                context.push(AppRoute.productDetail);
+                                context.push(
+                                  AppRoute.productDetail,
+                                  extra: state.productsEntity.products![index],
+                                );
                               },
                               child: ProductItem(
                                 productEntity:

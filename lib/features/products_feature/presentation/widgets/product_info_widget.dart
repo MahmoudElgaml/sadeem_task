@@ -4,15 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/IncreaseDecreaseOrderButton.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/product_detail_image.dart';
 
 import '../../../../core/utils/app_style.dart';
 
 class ProductInfoWidget extends StatelessWidget {
-  ProductInfoWidget({super.key});
+  ProductInfoWidget({super.key, required this.productEntity});
 
   num quantity = 1;
+  final ProductEntity productEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,12 @@ class ProductInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ExpandablePageView.builder(
-          itemCount: 3,
+          itemCount: productEntity.images?.length ?? 0,
           itemBuilder:
               (context, index) => ProductDetailImage(
-                // index: index,
-                // images: product.images ?? [],
+                isOutOfStock: productEntity.isAvailable,
+                index: index,
+                image: productEntity.images ?? [],
               ),
         ),
         const Gap(24),
@@ -33,14 +36,29 @@ class ProductInfoWidget extends StatelessWidget {
             SizedBox(
               width: 250,
               child: Text(
-                "test",
+                productEntity.title ?? "No Name",
                 overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+                maxLines: 2,
                 style: AppStyle.style18(context),
               ),
             ),
             const Spacer(),
-            Text("EGP ", style: AppStyle.style18(context)),
+            Column(
+              children: [
+                Text(
+                  productEntity.formattedDiscountedPrice,
+                  style: AppStyle.style18(context),
+                ),
+
+                Text(
+                  productEntity.formattedPrice,
+                  style: AppStyle.textRegular14(context).copyWith(
+                    color: const Color(0x9906004E),
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
         const Gap(24),
@@ -58,11 +76,17 @@ class ProductInfoWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: Text(" Sold", style: AppStyle.textRegular14(context)),
+              child: Text(
+                " ${productEntity.stock} inStock",
+                style: AppStyle.textRegular14(context),
+              ),
             ),
             const Gap(16),
             const Icon(Icons.star, color: Colors.yellow),
-            Text("ratting average ", style: AppStyle.textRegular14(context)),
+            Text(
+              productEntity.rating.toString(),
+              style: AppStyle.textRegular14(context),
+            ),
             const Spacer(),
 
             const IncreaseDecreaseOrderButton(),
@@ -72,7 +96,7 @@ class ProductInfoWidget extends StatelessWidget {
         Text("Description", style: AppStyle.style18(context)),
         const Gap(8),
         Text(
-          "Descriptin",
+          productEntity.description ?? "No description",
           style: AppStyle.textRegular14(
             context,
           ).copyWith(color: const Color(0x9906004E)),

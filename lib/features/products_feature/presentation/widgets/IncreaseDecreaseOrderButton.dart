@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
 
@@ -16,7 +17,7 @@ class IncreaseDecreaseOrderButton extends StatelessWidget {
       height: 42,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
       decoration: ShapeDecoration(
-        color: const Color(0xFF004182),
+        color: AppColor.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

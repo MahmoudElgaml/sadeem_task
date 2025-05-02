@@ -32,6 +32,28 @@ class ProductEntity {
     this.images,
     this.thumbnail,
   });
+  double? get priceAfterDiscount {
+    if (price == null || discountPercentage == null) return price;
+
+    double discountAmount = price! * (discountPercentage! / 100);
+    return price! - discountAmount;
+  }
+
+  // Format the price with two decimal places
+  String get formattedPrice {
+    return price != null ? '\$${price!.toStringAsFixed(2)}' : 'N/A';
+  }
+
+  // Format the discounted price with two decimal places
+  String get formattedDiscountedPrice {
+    return priceAfterDiscount != null
+        ? '\$${priceAfterDiscount!.toStringAsFixed(2)}'
+        : 'N/A';
+  }
+
+  bool get isAvailable {
+    return availabilityStatus == "In Stock" && stock != null && stock! > 0;
+  }
 }
 
 class ReviewEntity {

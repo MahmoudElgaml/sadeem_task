@@ -1,16 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
 
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_style.dart';
 
-
 class PriceAddToCartWidget extends StatelessWidget {
-  const PriceAddToCartWidget(
-      {super.key,});
-
+  const PriceAddToCartWidget({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,13 +17,13 @@ class PriceAddToCartWidget extends StatelessWidget {
           children: [
             Text(
               "Total Price",
-              style: AppStyle.style18(context).copyWith(
-                color: const Color(0x9906004E),
-              ),
+              style: AppStyle.style18(
+                context,
+              ).copyWith(color: const Color(0x9906004E)),
             ),
             const Gap(12),
             Text(
-              "EGP ",
+              productEntity.formattedDiscountedPrice,
               style: AppStyle.style18(context),
             ),
           ],
@@ -39,9 +37,7 @@ class PriceAddToCartWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            onPressed: () {
-       
-            },
+            onPressed: () {},
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: FittedBox(
@@ -55,15 +51,16 @@ class PriceAddToCartWidget extends StatelessWidget {
                     const Gap(24),
                     Text(
                       "Add To Cart",
-                      style: AppStyle.textMedium20(context)
-                          .copyWith(color: Colors.white),
+                      style: AppStyle.textMedium20(
+                        context,
+                      ).copyWith(color: Colors.white),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

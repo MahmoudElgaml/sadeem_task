@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
+import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/pick_color_list.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/pick_size_list.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/price_addtocart_widget.dart';
@@ -14,6 +15,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductEntity productDetail =
+        GoRouterState.of(context).extra! as ProductEntity;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -36,13 +39,13 @@ class ProductDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProductInfoWidget(),
+              ProductInfoWidget(productEntity: productDetail),
               const Gap(16),
               const PickSizeList(),
               const Gap(16),
               const PickColorList(),
               const Gap(48),
-              PriceAddToCartWidget(),
+              PriceAddToCartWidget(productEntity: productDetail),
             ],
           ),
         ),

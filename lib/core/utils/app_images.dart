@@ -8,6 +8,8 @@ class Assets{
   static const String cartIcon= "assets/images/shopping-cart.png";
   static const String imagesIncreaseIcon= "assets/images/increaseIcon.svg";
   static const String imagesDecreaseIocn= "assets/images/decreaseIocn.png";
+  static const String imagesOutOfStock= "assets/images/out-of-stock.png";
+
 
 
 

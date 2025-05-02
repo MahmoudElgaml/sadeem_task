@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
 import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
@@ -27,7 +28,7 @@ class ProductItem extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 191 / 128,
               child: Image.network(
-                productEntity.images?[0] ?? "",
+                productEntity.thumbnail ?? "",
                 fit: BoxFit.fill,
               ),
             ),
@@ -46,24 +47,24 @@ class ProductItem extends StatelessWidget {
                 //   overflow: TextOverflow.ellipsis,
                 //   style: AppStyle.textRegular14(context),
                 // ),
+                const Gap(6),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      productEntity.price.toString(),
-                      style: AppStyle.textRegular14(context),
+                      productEntity.formattedDiscountedPrice,
+                      style: AppStyle.style20(context),
                     ),
-                    const SizedBox(width: 16),
+                    const Gap(12),
                     Text(
-                      productEntity.discountPercentage.toString(),
+                      productEntity.formattedPrice,
                       style: AppStyle.textRegular12(
                         context,
                       ).copyWith(decoration: TextDecoration.lineThrough),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -75,7 +76,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     const Icon(Icons.star, color: Colors.yellow),
-                    Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: SvgPicture.asset(Assets.iconPlus),
