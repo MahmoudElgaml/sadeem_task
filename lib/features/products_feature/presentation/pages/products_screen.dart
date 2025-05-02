@@ -44,7 +44,9 @@ class ProductsScreen extends StatelessWidget {
                             ),
                         itemBuilder:
                             (context, index) => InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                context.push(AppRoute.productDetail);
+                              },
                               child: ProductItem(
                                 productEntity:
                                     state.productsEntity.products![index],

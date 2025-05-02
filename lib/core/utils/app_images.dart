@@ -6,6 +6,8 @@ class Assets{
   static const String iconPlus= "assets/images/iconPlus.svg";
   static const String productIcon= "assets/images/box.png";
   static const String cartIcon= "assets/images/shopping-cart.png";
+  static const String imagesIncreaseIcon= "assets/images/increaseIcon.svg";
+  static const String imagesDecreaseIocn= "assets/images/decreaseIocn.png";
 
 
 

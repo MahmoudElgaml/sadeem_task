@@ -67,6 +67,7 @@ dependencies:
   quickalert: ^1.1.0
   loading_animation_widget: ^1.3.0
   flashy_tab_bar2: ^0.0.10
+  expandable_page_view: ^1.0.17
   # iOS style icons
   cupertino_icons: ^1.0.8
 
