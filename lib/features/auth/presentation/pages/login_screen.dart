@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                   child: Image.asset(Assets.bubbleText),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   child: Image.asset(Assets.login_photo),
                 ),
               ],
