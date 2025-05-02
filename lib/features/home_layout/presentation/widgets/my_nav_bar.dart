@@ -20,10 +20,12 @@ class _MyNavBarState extends State<MyNavBar> {
       selectedIndex: _selectedIndex,
       showElevation: true,
       onItemSelected: (index) {
+          context.read<HomeLayoutCubit>().changeScreen(index);
         setState(() {
           _selectedIndex = index;
+        
         });
-        context.read<HomeLayoutCubit>().changeScreen(index);
+        
       },
       items: [
         FlashyTabBarItem(

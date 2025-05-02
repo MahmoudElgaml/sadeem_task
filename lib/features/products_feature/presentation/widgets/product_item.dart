@@ -31,7 +31,8 @@ class ProductItem extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(3.0),
-                child: SvgPicture.asset(Assets.iconPlus),
+                child: SvgPicture.asset(Assets.iconPlus,
+                 ),
               ),
             ],
           ),
