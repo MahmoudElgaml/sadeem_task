@@ -8,8 +8,8 @@ import 'package:sadeem_task/features/home_layout/presentation/screens/home_layou
 import 'package:sadeem_task/features/products_feature/presentation/pages/product_detail_screen.dart';
 
 class AppRoute {
-  static const homeLayout = '/';
-  static const login = '/login';
+  static const homeLayout = '/home_layout';
+  static const login = '/';
   static const productDetail = '/productDetail';
   static final router = GoRouter(
     routes: [

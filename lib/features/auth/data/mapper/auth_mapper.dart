@@ -11,6 +11,7 @@ class AuthMapper {
       email: loginResponseDto.email,
       image: loginResponseDto.image,
       name: " ${loginResponseDto.firstName} ${loginResponseDto.lastName}",
+      id: loginResponseDto.id,
     );
   }
  static LoginRequestDto loginRequestEntityToDto(

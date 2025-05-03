@@ -8,7 +8,7 @@ void main() {
   configureDependencies();
   runApp(
   DevicePreview(
-    enabled: false,
+    enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
   ),
 );
