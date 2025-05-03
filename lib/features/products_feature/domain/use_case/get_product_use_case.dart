@@ -9,7 +9,10 @@ class GetProductUseCase {
   final ProductRepo _productRepo;
   GetProductUseCase(this._productRepo);
 
-  Future<DataResult<ProductsEntity>> call() async {
-    return await _productRepo.getProducts();
+  Future<DataResult<ProductsEntity>> call({
+    required int limit,
+    required int skip,
+  }) async {
+    return await _productRepo.getProducts(limit: limit, skip: skip);
   }
 }

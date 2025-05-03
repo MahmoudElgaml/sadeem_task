@@ -13,13 +13,15 @@ part 'product_state.dart';
 @injectable
 class ProductCubit extends Cubit<ProductState> {
   GetProductUseCase getProductUseCase;
-
+  int limit = 20;
+  int skip = 0;
+  bool hasMore = true;
+  List<ProductEntity> products = [];
   ProductCubit(this.getProductUseCase) : super(ProductInitial());
 
   doAction(ProductActions action) {
     print("soooo");
     switch (action) {
-      
       case GetProductsAction():
         {
           Logger().d("GetProductsAction");
@@ -29,12 +31,31 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  getProducts() async {
-    emit(GetProductLoading());
-    var result = await getProductUseCase.call();
+  getProducts({bool isLoadingMore = false}) async {
+    if (!hasMore && isLoadingMore) {
+      return;
+    }
+    if (!isLoadingMore) {
+      skip = 0;
+    
+      hasMore = true;
+      products = [];
+      emit(GetProductLoading());
+    }
+
+    var result = await getProductUseCase.call(limit: limit, skip: skip);
+
     switch (result) {
       case Success<ProductsEntity>():
-        emit(GetProductSuccess(result.data));
+        {
+          if (result.data.products!.isEmpty) {
+            hasMore = false;
+          } else {
+            products.addAll(result.data.products!);
+            skip += limit;
+          }
+          emit(GetProductSuccess(ProductsEntity(products: products)));
+        }
         break;
       case Fail():
         emit(

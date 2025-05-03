@@ -34,28 +34,40 @@ class ProductsScreen extends StatelessWidget {
                     return Center(child: Text(state.error));
                   } else if (state is GetProductSuccess) {
                     return Expanded(
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 16,
-                              crossAxisSpacing: 16,
-                              childAspectRatio: 191 / 270,
-                            ),
-                        itemBuilder:
-                            (context, index) => InkWell(
-                              onTap: () {
-                                context.push(
-                                  AppRoute.productDetail,
-                                  extra: state.productsEntity.products![index],
-                                );
-                              },
-                              child: ProductItem(
-                                productEntity:
-                                    state.productsEntity.products![index],
+                      child: NotificationListener<ScrollNotification>(
+                        onNotification: (notification) {
+                          if (notification.metrics.pixels ==
+                              notification.metrics.maxScrollExtent) {
+                            context.read<ProductCubit>().getProducts(
+                              isLoadingMore: true,
+                            );
+                          }
+                          return true ;
+                        },
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16,
+                                crossAxisSpacing: 16,
+                                childAspectRatio: 191 / 270,
                               ),
-                            ),
-                        itemCount: 20,
+                          itemBuilder:
+                              (context, index) => InkWell(
+                                onTap: () {
+                                  context.push(
+                                    AppRoute.productDetail,
+                                    extra:
+                                        state.productsEntity.products![index],
+                                  );
+                                },
+                                child: ProductItem(
+                                  productEntity:
+                                      state.productsEntity.products![index],
+                                ),
+                              ),
+                          itemCount: state.productsEntity.products?.length??0,
+                        ),
                       ),
                     );
                   } else {

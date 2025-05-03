@@ -11,9 +11,15 @@ class ProductRepoImpl implements ProductRepo {
   final ProductRemote _productRemote;
   ProductRepoImpl(this._productRemote);
   @override
-  Future<DataResult<ProductsEntity>> getProducts() async {
+  Future<DataResult<ProductsEntity>> getProducts({
+    required int limit,
+    required int skip,
+  }) async {
     return executeApi(() async {
-      var response = await _productRemote.getProducts();
+      var response = await _productRemote.getProducts(
+        limit,
+        skip,
+      );
       return ProductMapper.productDtoToEntity(response);
     });
   }
