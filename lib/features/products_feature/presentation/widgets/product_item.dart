@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
 import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
@@ -13,7 +15,7 @@ class ProductItem extends StatelessWidget {
     return Container(
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 2, color: Color(0x4C004182)),
+          side: const BorderSide(width: 1, color: AppColor.primaryColor),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
@@ -27,9 +29,12 @@ class ProductItem extends StatelessWidget {
             ),
             child: AspectRatio(
               aspectRatio: 191 / 128,
-              child: Image.network(
-                productEntity.thumbnail ?? "",
+              child: CachedNetworkImage(
+                imageUrl: productEntity.thumbnail ?? "",
                 fit: BoxFit.fill,
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.error, color: Colors.black);
+                },
               ),
             ),
           ),

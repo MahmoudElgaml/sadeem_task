@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
@@ -27,8 +28,8 @@ class ProductDetailImage extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Image.network(
-                  image[index],
+                CachedNetworkImage(
+                  imageUrl: image[index],
                   width: double.infinity,
                   fit: BoxFit.fill,
                 ),
@@ -37,13 +38,13 @@ class ProductDetailImage extends StatelessWidget {
                       Assets.imagesOutOfStock,
                       color: AppColor.primaryColor,
                     )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: OfferImageIndicator(
             selectedIndex: index,
             numberIndicator: image.length,
