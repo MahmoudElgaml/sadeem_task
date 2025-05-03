@@ -53,22 +53,24 @@ class ProductItem extends StatelessWidget {
                 //   style: AppStyle.textRegular14(context),
                 // ),
                 const Gap(6),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      productEntity.formattedDiscountedPrice,
-                      style: AppStyle.style20(context),
-                    ),
-                    const Gap(12),
-                    Text(
-                      productEntity.formattedPrice,
-                      style: AppStyle.textRegular12(
-                        context,
-                      ).copyWith(decoration: TextDecoration.lineThrough),
-                    ),
-                  ],
+                FittedBox(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        productEntity.formattedDiscountedPrice,
+                        style: AppStyle.style20(context),
+                      ),
+                      const Gap(12),
+                      Text(
+                        productEntity.formattedPrice,
+                        style: AppStyle.textRegular12(
+                          context,
+                        ).copyWith(decoration: TextDecoration.lineThrough),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

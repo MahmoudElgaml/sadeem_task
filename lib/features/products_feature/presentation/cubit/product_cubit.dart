@@ -37,10 +37,14 @@ class ProductCubit extends Cubit<ProductState> {
     }
     if (!isLoadingMore) {
       skip = 0;
-    
+
       hasMore = true;
       products = [];
       emit(GetProductLoading());
+    } else {
+      emit(
+        GetProductLoadingMore(ProductsEntity(products: List.from(products))),
+      );
     }
 
     var result = await getProductUseCase.call(limit: limit, skip: skip);

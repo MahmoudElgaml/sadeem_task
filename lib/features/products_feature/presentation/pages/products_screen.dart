@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:logger/logger.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/features/products_feature/presentation/cubit/product_cubit.dart';
@@ -13,6 +14,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().e(context.read<ProductCubit>().products.length);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -32,17 +34,24 @@ class ProductsScreen extends StatelessWidget {
                     );
                   } else if (state is GetProductError) {
                     return Center(child: Text(state.error));
-                  } else if (state is GetProductSuccess) {
+                  } else if (state is GetProductSuccess ||
+                      state is GetProductLoadingMore) {
+                    final productsEntity =
+                        state is GetProductSuccess
+                            ? state.productsEntity
+                            : (state as GetProductLoadingMore).productsEntity;
                     return Expanded(
                       child: NotificationListener<ScrollNotification>(
                         onNotification: (notification) {
-                          if (notification.metrics.pixels ==
-                              notification.metrics.maxScrollExtent) {
+                          if (state is! GetProductLoadingMore &&
+                              notification.metrics.pixels >=
+                                  notification.metrics.maxScrollExtent * 0.88 &&
+                              notification.depth == 0) {
                             context.read<ProductCubit>().getProducts(
                               isLoadingMore: true,
                             );
                           }
-                          return true ;
+                          return true;
                         },
                         child: GridView.builder(
                           gridDelegate:
@@ -52,21 +61,28 @@ class ProductsScreen extends StatelessWidget {
                                 crossAxisSpacing: 16,
                                 childAspectRatio: 191 / 270,
                               ),
-                          itemBuilder:
-                              (context, index) => InkWell(
-                                onTap: () {
-                                  context.push(
-                                    AppRoute.productDetail,
-                                    extra:
-                                        state.productsEntity.products![index],
-                                  );
-                                },
-                                child: ProductItem(
-                                  productEntity:
-                                      state.productsEntity.products![index],
-                                ),
+                          itemBuilder: (context, index) {
+                            if (index >= productsEntity.products!.length &&
+                                state is GetProductLoadingMore) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return InkWell(
+                              onTap: () {
+                                context.push(
+                                  AppRoute.productDetail,
+                                  extra: productsEntity.products![index],
+                                );
+                              },
+                              child: ProductItem(
+                                productEntity: productsEntity.products![index],
                               ),
-                          itemCount: state.productsEntity.products?.length??0,
+                            );
+                          },
+                          itemCount:
+                              (productsEntity.products?.length ?? 0) +
+                              (state is GetProductLoadingMore ? 2 : 0),
                         ),
                       ),
                     );
