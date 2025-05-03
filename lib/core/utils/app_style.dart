@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 
 class AppStyle {
+  static TextStyle style12Reqular(BuildContext context) {
+    return TextStyle(
+      color: Colors.black,
+      fontSize: responsiveFont(fontSize: 12, context: context),
+      fontWeight: FontWeight.w400,
+    );
+  }
   static TextStyle style18(BuildContext context) {
     return TextStyle(
       color: Colors.black,
