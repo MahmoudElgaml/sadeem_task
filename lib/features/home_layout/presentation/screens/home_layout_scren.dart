@@ -10,7 +10,6 @@ class HomeLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('HomeLayoutScren')),
       body: BlocBuilder<HomeLayoutCubit, HomeLayoutState>(
         builder: (context, state) {
           return state.getWidget();

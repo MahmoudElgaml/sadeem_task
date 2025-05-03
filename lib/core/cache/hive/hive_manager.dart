@@ -7,7 +7,7 @@ import 'package:sadeem_task/features/auth/data/model/response/log_in_response_dt
 import 'package:sadeem_task/features/auth/domain/entites/response/login_response_entity.dart';
 @injectable
 class HiveManager {
-  void inti() async {
+  Future<void> inti() async {
     await Hive.initFlutter();
     _registerAdapter();
     await _openBox();

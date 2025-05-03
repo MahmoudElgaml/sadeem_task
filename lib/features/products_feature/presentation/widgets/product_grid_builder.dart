@@ -31,50 +31,48 @@ class ProductGridBuilder extends StatelessWidget {
               state is GetProductSuccess
                   ? state.productsEntity
                   : (state as GetProductLoadingMore).productsEntity;
-          return Expanded(
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (notification) {
-                if (state is! GetProductLoadingMore &&
-                    notification.metrics.pixels >=
-                        notification.metrics.maxScrollExtent * 0.88 &&
-                    notification.depth == 0) {
-                  context.read<ProductCubit>().getProducts(
-                    isLoadingMore: true,
+          return NotificationListener<ScrollNotification>(
+            onNotification: (notification) {
+              if (state is! GetProductLoadingMore &&
+                  notification.metrics.pixels >=
+                      notification.metrics.maxScrollExtent * 0.88 &&
+                  notification.depth == 0) {
+                context.read<ProductCubit>().getProducts(
+                  isLoadingMore: true,
+                );
+              }
+              return true;
+            },
+            child: GridView.builder(
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 191 / 280,
+                  ),
+              itemBuilder: (context, index) {
+                if (index >= productsEntity.products!.length &&
+                    state is GetProductLoadingMore) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 }
-                return true;
-              },
-              child: GridView.builder(
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      childAspectRatio: 191 / 270,
-                    ),
-                itemBuilder: (context, index) {
-                  if (index >= productsEntity.products!.length &&
-                      state is GetProductLoadingMore) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                return InkWell(
+                  onTap: () {
+                    context.push(
+                      AppRoute.productDetail,
+                      extra: productsEntity.products![index],
                     );
-                  }
-                  return InkWell(
-                    onTap: () {
-                      context.push(
-                        AppRoute.productDetail,
-                        extra: productsEntity.products![index],
-                      );
-                    },
-                    child: ProductItem(
-                      productEntity: productsEntity.products![index],
-                    ),
-                  );
-                },
-                itemCount:
-                    (productsEntity.products?.length ?? 0) +
-                    (state is GetProductLoadingMore ? 2 : 0),
-              ),
+                  },
+                  child: ProductItem(
+                    productEntity: productsEntity.products![index],
+                  ),
+                );
+              },
+              itemCount:
+                  (productsEntity.products?.length ?? 0) +
+                  (state is GetProductLoadingMore ? 2 : 0),
             ),
           );
         } else {

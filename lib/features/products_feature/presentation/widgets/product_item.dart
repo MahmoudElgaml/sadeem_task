@@ -12,12 +12,12 @@ class ProductItem extends StatelessWidget {
   final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: AppColor.primaryColor),
-          borderRadius: BorderRadius.circular(15),
-        ),
+    return Card(
+      color: AppColor.whiteColor,
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppColor.backgroundColor),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

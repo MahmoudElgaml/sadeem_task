@@ -2,10 +2,14 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
+import 'package:sadeem_task/core/cache/hive/hive_manager.dart';
 import 'package:sadeem_task/core/di/config.dart';
 
-void main() {
+void main() async{
   configureDependencies();
+  // Initialize Hive or any other services here if needed
+ await getIt<HiveManager>().inti();
+  
   runApp(
   DevicePreview(
     enabled: !kReleaseMode,
