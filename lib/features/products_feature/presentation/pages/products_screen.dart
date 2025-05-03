@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 import 'package:sadeem_task/config/routes/routes.dart';
+import 'package:sadeem_task/core/cache/storage_token.dart';
+import 'package:sadeem_task/core/di/config.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/component/white_contanier.dart';
 import 'package:sadeem_task/features/products_feature/presentation/cubit/product_cubit.dart';
@@ -18,8 +20,8 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Logger().e(context.read<ProductCubit>().products.length);
-    return  const Scaffold(
+    
+    return const Scaffold(
       backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16, right: 16),

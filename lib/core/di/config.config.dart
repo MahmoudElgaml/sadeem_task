@@ -31,6 +31,7 @@ import '../../features/products_feature/presentation/cubit/product_cubit.dart'
     as _i880;
 import '../api/dio_factory.dart' as _i1008;
 import '../cache/hive/hive_manager.dart' as _i329;
+import '../cache/storage_token.dart' as _i170;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,6 +46,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final dioFactory = _$DioFactory();
     gh.factory<_i329.HiveManager>(() => _i329.HiveManager());
+    gh.factory<_i170.StorageToken>(() => _i170.StorageToken());
     gh.factory<_i579.HomeLayoutCubit>(() => _i579.HomeLayoutCubit());
     gh.singleton<_i361.Dio>(() => dioFactory.getDio());
     gh.factory<_i77.LoginRemote>(() => _i77.LoginRemote(gh<_i361.Dio>()));
