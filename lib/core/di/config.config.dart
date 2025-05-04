@@ -17,6 +17,7 @@ import '../../features/auth/data/repo/login_repo_impl.dart' as _i795;
 import '../../features/auth/domain/repo/login_repo.dart' as _i543;
 import '../../features/auth/domain/use_case/login_use_case.dart' as _i973;
 import '../../features/auth/presentation/cubit/login_cubit.dart' as _i69;
+import '../../features/cart/data/data_source/remote/cart_remote.dart' as _i24;
 import '../../features/home_layout/presentation/cubit/home_layout_cubit.dart'
     as _i579;
 import '../../features/products_feature/data/data_source/remote/product_remote.dart'
@@ -51,6 +52,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioFactory.getDio());
     gh.factory<_i77.LoginRemote>(() => _i77.LoginRemote(gh<_i361.Dio>()));
     gh.factory<_i998.ProductRemote>(() => _i998.ProductRemote(gh<_i361.Dio>()));
+    gh.factory<_i24.CartRemote>(() => _i24.CartRemote(gh<_i361.Dio>()));
     gh.factory<_i1073.ProductRepo>(
         () => _i953.ProductRepoImpl(gh<_i998.ProductRemote>()));
     gh.factory<_i543.LoginRepo>(
