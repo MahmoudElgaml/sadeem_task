@@ -6,9 +6,11 @@ import 'package:sadeem_task/features/auth/presentation/pages/login_screen.dart';
 import 'package:sadeem_task/features/home_layout/presentation/cubit/home_layout_cubit.dart';
 import 'package:sadeem_task/features/home_layout/presentation/screens/home_layout_scren.dart';
 import 'package:sadeem_task/features/products_feature/presentation/pages/product_detail_screen.dart';
+import 'package:sadeem_task/features/splash/splash_screen.dart';
 
 class AppRoute {
-  static const homeLayout = '/';
+   static const splash = '/';
+  static const homeLayout = '/home';
   static const login = '/login';
   static const productDetail = '/productDetail';
   static final router = GoRouter(
@@ -37,6 +39,10 @@ class AppRoute {
           return  const ProductDetailScreen();
         },
       ),
+      GoRoute(
+        path: splash,
+        builder: (context, state) => const SplashBody(),
+      )
     ],
   );
 }

@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:sadeem_task/core/cache/hive/hive_keyes.dart';
+import 'package:sadeem_task/core/cache/hive/hive_manager.dart';
+import 'package:sadeem_task/core/di/config.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/request/add_cart_entity.dart';
+import 'package:sadeem_task/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
 
 class ProductItem extends StatelessWidget {
@@ -86,9 +92,29 @@ class ProductItem extends StatelessWidget {
                     const SizedBox(height: 4),
                     const Icon(Icons.star, color: Colors.yellow),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: SvgPicture.asset(Assets.iconPlus),
+                    InkWell(
+                      onTap: () async {
+                        var userId =
+                            getIt<HiveManager>()
+                                .retrieveUserData(HiveKeys.userBox)
+                                ?.id;
+
+                        context.read<CartCubit>().addToCartItems(
+                          AddCartEntity(
+                            userId: userId,
+                            products: [
+                              AddCartProductEntity(
+                                id: productEntity.id ?? 0,
+                                quantity: 1,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: SvgPicture.asset(Assets.iconPlus),
+                      ),
                     ),
                   ],
                 ),

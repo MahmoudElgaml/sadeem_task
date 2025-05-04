@@ -5,5 +5,8 @@ abstract class AppString{
   static const String error="Error";
   static const String ok="Ok";
   static const String orderNow="Order Now";
+  static const String cartDeletedMessage="Cart Deleted Successfully";
+  static const String cartEmptyMessage="Your Cart is Empty";
+  static const String splashText=" Find You Want";
 
 }

@@ -8,8 +8,14 @@ sealed class HomeLayoutState {
 final class ProductsScreenState extends HomeLayoutState {
   @override
   Widget getWidget() {
-    return BlocProvider(
-      create: (context) => getIt<ProductCubit>()..doAction(GetProductsAction()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create:
+              (context) => getIt<ProductCubit>()..doAction(GetProductsAction()),
+        ),
+        BlocProvider(create: (context) => getIt<CartCubit>()),
+      ],
       child: const ProductsScreen(),
     );
   }
