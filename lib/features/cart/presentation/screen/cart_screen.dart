@@ -33,7 +33,7 @@ class CartScreen extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(
               size: 35,
-              Icons.shopping_cart_outlined,
+              Icons.delete,
               color: AppColor.primaryColor,
             ),
           ),

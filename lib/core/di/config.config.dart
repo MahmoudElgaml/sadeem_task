@@ -57,8 +57,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i579.HomeLayoutCubit>(() => _i579.HomeLayoutCubit());
     gh.singleton<_i361.Dio>(() => dioFactory.getDio());
     gh.factory<_i77.LoginRemote>(() => _i77.LoginRemote(gh<_i361.Dio>()));
-    gh.factory<_i998.ProductRemote>(() => _i998.ProductRemote(gh<_i361.Dio>()));
     gh.factory<_i24.CartRemote>(() => _i24.CartRemote(gh<_i361.Dio>()));
+    gh.factory<_i998.ProductRemote>(() => _i998.ProductRemote(gh<_i361.Dio>()));
     gh.factory<_i379.CartRepo>(() => _i234.CartRepoImpl(gh<_i24.CartRemote>()));
     gh.factory<_i1073.ProductRepo>(
         () => _i953.ProductRepoImpl(gh<_i998.ProductRemote>()));

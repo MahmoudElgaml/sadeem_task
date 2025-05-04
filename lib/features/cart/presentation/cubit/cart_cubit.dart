@@ -28,9 +28,11 @@ class CartCubit extends Cubit<CartState> {
     switch (result) {
       case Success<CartEntity>():
         {
-          if (result.data.items == null &&
+          if (result.data.items == null ||
               (result.data.items?.isEmpty ?? true)) {
-            emit(GetCartEmpty());
+            if (result.data.total == 0) {
+              emit(GetCartEmpty());
+            }
           } else {
             emit(GetCartSuccess(result.data));
           }

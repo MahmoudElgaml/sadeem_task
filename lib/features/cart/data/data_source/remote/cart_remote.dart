@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:sadeem_task/core/api/end_points.dart';
 import 'package:sadeem_task/features/cart/data/model/request/update_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
+import 'package:sadeem_task/features/cart/data/model/response/delete_cart_response.dart';
 part 'cart_remote.g.dart';
 
 @injectable
@@ -19,4 +20,8 @@ abstract class CartRemote {
     @Path('id') String cartId,
     @Body() UpdateCartRequestDto updateCartRequestDto,
   );
+  @DELETE(EndPoints.deleteCart)
+  Future<DeleteCartResponse> deleteCartItems(@Path('id') String cartId) ;
+    
+  
 }
