@@ -8,8 +8,8 @@ import 'package:sadeem_task/core/utils/app_style.dart';
 
 
 class IncreaseDecreaseOrderButton extends StatelessWidget {
-  const IncreaseDecreaseOrderButton({super.key});
-
+  const IncreaseDecreaseOrderButton({super.key, required this.quantity});
+ final  num quantity;
   @override
   Widget build(BuildContext context) {
     return   Container(
@@ -31,7 +31,7 @@ class IncreaseDecreaseOrderButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22.0),
               child: Text(
-                "1",
+                quantity.toString(),
                 style: AppStyle.style18(context).copyWith(color: Colors.white),
               ),
             ),

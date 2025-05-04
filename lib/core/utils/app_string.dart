@@ -4,5 +4,6 @@ abstract class AppString{
   static const String signUp="Sign Up";
   static const String error="Error";
   static const String ok="Ok";
+  static const String orderNow="Order Now";
 
 }

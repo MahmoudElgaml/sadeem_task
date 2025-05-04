@@ -18,6 +18,9 @@ final class ProductsScreenState extends HomeLayoutState {
 final class CartScreenState extends HomeLayoutState {
   @override
   Widget getWidget() {
-    return const Placeholder();
+    return BlocProvider(
+      create: (context) => getIt<CartCubit>()..getCartItems(),
+      child: CartScreen(),
+    );
   }
 }
