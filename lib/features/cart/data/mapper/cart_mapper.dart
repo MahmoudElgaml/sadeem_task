@@ -1,5 +1,7 @@
+import 'package:sadeem_task/features/cart/data/model/request/update_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
-import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/request/update_cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 
 class CartMapper {
   static CartEntity singleCartToEntity(Cart cart) {
@@ -26,6 +28,20 @@ class CartMapper {
       discountPercentage: product.discountPercentage,
       discountedTotal: product.discountedTotal,
       image: product.thumbnail,
+    );
+  }
+   // Request mappings
+  static UpdateCartRequestDto updateCartEntityToDto(UpdateCartRequestEntity entity) {
+    return UpdateCartRequestDto(
+      merge: entity.merge,
+      products: entity.products?.map((product) => cartProductEntityToDto(product)).toList(),
+    );
+  }
+  
+  static CartProductRequestDto cartProductEntityToDto(CartProductRequestEntity entity) {
+    return CartProductRequestDto(
+      id: entity.id,
+      quantity: entity.quantity,
     );
   }
 }

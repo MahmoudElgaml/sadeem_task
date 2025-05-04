@@ -6,7 +6,7 @@ import 'package:sadeem_task/core/cache/hive/hive_keyes.dart';
 import 'package:sadeem_task/core/cache/hive/hive_manager.dart';
 import 'package:sadeem_task/core/di/config.dart';
 import 'package:sadeem_task/core/error/error_handler.dart';
-import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/use_case/get_cart_use_case.dart';
 
 part 'cart_state.dart';

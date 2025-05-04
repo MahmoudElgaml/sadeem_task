@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadeem_task/core/utils/app_string.dart';
-import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 import 'package:sadeem_task/features/products_feature/domain/entites/response/product_entity.dart';
 
 import '../../../../core/utils/app_color.dart';

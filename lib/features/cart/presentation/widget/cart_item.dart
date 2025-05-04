@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
-import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/cart_product_information.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/increase_decrease_cart_button.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/IncreaseDecreaseOrderButton.dart';

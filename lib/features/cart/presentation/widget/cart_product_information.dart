@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
-import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key, required this.cartItem});
