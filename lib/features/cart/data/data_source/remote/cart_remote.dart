@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sadeem_task/core/api/end_points.dart';
+import 'package:sadeem_task/features/cart/data/model/request/update_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
 part 'cart_remote.g.dart';
 
@@ -13,4 +14,9 @@ abstract class CartRemote {
 
   @GET(EndPoints.getCart)
   Future<CartDto> getCartItems(@Path('id') String userId);
+  @PUT(EndPoints.updateCart)
+  Future<CartDto> updateCartItems(
+    @Path('id') String cartId,
+    @Body() UpdateCartRequestDto updateCartRequestDto,
+  );
 }
