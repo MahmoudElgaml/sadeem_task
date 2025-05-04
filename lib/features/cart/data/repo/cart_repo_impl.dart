@@ -5,6 +5,7 @@ import 'package:sadeem_task/features/cart/data/data_source/remote/cart_remote.da
 import 'package:sadeem_task/features/cart/data/mapper/cart_mapper.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/delete_cart_response.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/request/add_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/request/update_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/repo/cart_repo.dart';
@@ -65,4 +66,27 @@ class CartRepoImpl implements CartRepo {
       return response;
     });
   }
+
+  @override
+  Future<DataResult<CartEntity>> addCartItems(AddCartEntity cartData) {
+    return executeApi(() async {
+      var response = await cartRemote.addCartItems(
+        CartMapper.addCartEntityToDto(cartData),
+      );
+      return CartMapper.singleCartToEntity(
+        response.products!.isNotEmpty
+            ? response
+            : Cart(
+              id: 0,
+              products: [],
+              total: 0,
+              discountedTotal: 0,
+              totalProducts: 0,
+              totalQuantity: 0,
+            ),
+      );
+    });
+  }
+
+ 
 }

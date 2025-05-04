@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sadeem_task/core/api/end_points.dart';
+import 'package:sadeem_task/features/cart/data/model/request/add_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/request/update_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/delete_cart_response.dart';
@@ -21,7 +22,7 @@ abstract class CartRemote {
     @Body() UpdateCartRequestDto updateCartRequestDto,
   );
   @DELETE(EndPoints.deleteCart)
-  Future<DeleteCartResponse> deleteCartItems(@Path('id') String cartId) ;
-    
-  
+  Future<DeleteCartResponse> deleteCartItems(@Path('id') String cartId);
+  @POST(EndPoints.addCart)
+  Future<Cart> addCartItems(@Body() AddCartRequestDto addCartRequestDto);
 }

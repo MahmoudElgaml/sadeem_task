@@ -1,5 +1,7 @@
+import 'package:sadeem_task/features/cart/data/model/request/add_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/request/update_cart_request_dto.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/request/add_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/request/update_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 
@@ -30,18 +32,38 @@ class CartMapper {
       image: product.thumbnail,
     );
   }
-   // Request mappings
-  static UpdateCartRequestDto updateCartEntityToDto(UpdateCartRequestEntity entity) {
+
+  // Request mappings
+  static UpdateCartRequestDto updateCartEntityToDto(
+    UpdateCartRequestEntity entity,
+  ) {
     return UpdateCartRequestDto(
       merge: entity.merge,
-      products: entity.products?.map((product) => cartProductEntityToDto(product)).toList(),
+      products:
+          entity.products
+              ?.map((product) => cartProductEntityToDto(product))
+              .toList(),
     );
   }
-  
-  static CartProductRequestDto cartProductEntityToDto(CartProductRequestEntity entity) {
-    return CartProductRequestDto(
-      id: entity.id,
-      quantity: entity.quantity,
+
+  static CartProductRequestDto cartProductEntityToDto(
+    CartProductRequestEntity entity,
+  ) {
+    return CartProductRequestDto(id: entity.id, quantity: entity.quantity);
+  }
+
+  static AddCartRequestDto addCartEntityToDto(AddCartEntity entity) {
+    return AddCartRequestDto(
+      userId: entity.userId,
+      products:
+          entity.products
+              ?.map(
+                (product) => AddCartProductDto(
+                  id: product.id,
+                  quantity: product.quantity,
+                ),
+              )
+              .toList(),
     );
   }
 }
