@@ -45,6 +45,8 @@ class ProductItem extends StatelessWidget {
               children: [
                 Text(
                   productEntity.title ?? "No Name",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: AppStyle.textRegular14(context),
                 ),
                 // Text(
