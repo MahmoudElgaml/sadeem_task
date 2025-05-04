@@ -11,6 +11,7 @@ class Assets{
   static const String imagesOutOfStock= "assets/images/out-of-stock.png";
   static const String imagesEmptyCart= "assets/images/shopping.png";
   static const String warning= "assets/images/warning.png";
+  static const String splashLogo= "assets/images/website-layout.png";
 
 
 
