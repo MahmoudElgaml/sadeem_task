@@ -5,7 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sadeem_task/core/di/config.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
+import 'package:sadeem_task/core/utils/app_string.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
+import 'package:sadeem_task/core/utils/component/dialog/dilog_utils.dart';
 import 'package:sadeem_task/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/cart_item.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/price_order_button.dart';
@@ -30,7 +32,11 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              var cubit = context.read<CartCubit>();
+              if (cubit.cartId == null) return;
+              cubit.deleteCartItems(cubit.cartId.toString());
+            },
             icon: const Icon(
               size: 35,
               Icons.delete,
@@ -42,7 +48,15 @@ class CartScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
-        child: BlocBuilder<CartCubit, CartState>(
+        child: BlocConsumer<CartCubit, CartState>(
+          listener: (context, state) {
+            if (state is DeleteCartState) {
+              DialogUtils.showSuccesLoading(
+                context,
+                AppString.cartDeletedMessage,
+              );
+            }
+          },
           builder: (context, state) {
             if (state is GetCartLoading) {
               return Center(
@@ -92,6 +106,13 @@ class CartScreen extends StatelessWidget {
                     child: PriceOrderButton(cartEntity: state.cartEntity),
                   ),
                 ],
+              );
+            } else if (state is DeleteCartState) {
+              return Center(
+                child: Text(
+                  "Your cart is empty",
+                  style: AppStyle.style18(context),
+                ),
               );
             } else {
               return Center(

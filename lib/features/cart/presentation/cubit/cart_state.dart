@@ -16,3 +16,4 @@ final class GetCartError extends CartState {
   GetCartError(this.error);
 }
 final class GetCartEmpty extends CartState {}
+final class DeleteCartState extends CartState {}

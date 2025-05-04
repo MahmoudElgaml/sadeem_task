@@ -6,8 +6,10 @@ import 'package:sadeem_task/core/cache/hive/hive_keyes.dart';
 import 'package:sadeem_task/core/cache/hive/hive_manager.dart';
 import 'package:sadeem_task/core/di/config.dart';
 import 'package:sadeem_task/core/error/error_handler.dart';
+import 'package:sadeem_task/features/cart/data/model/response/delete_cart_response.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/request/update_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
+import 'package:sadeem_task/features/cart/domain/use_case/delete_cart_use_case.dart';
 import 'package:sadeem_task/features/cart/domain/use_case/get_cart_use_case.dart';
 import 'package:sadeem_task/features/cart/domain/use_case/update_cart_use_case.dart';
 
@@ -17,8 +19,10 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   GetCartUseCase getCartUseCase;
   UpdateCartUseCase updateCartUseCase;
+  DeleteCartUseCase deleteCartUseCase;
+  num? cartId;
 
-  CartCubit(this.getCartUseCase, this.updateCartUseCase) : super(CartInitial());
+  CartCubit(this.getCartUseCase, this.updateCartUseCase,this.deleteCartUseCase) : super(CartInitial());
 
   Future<void> getCartItems() async {
     var userId = getIt<HiveManager>().retrieveUserData(HiveKeys.userBox)?.id;
@@ -34,6 +38,7 @@ class CartCubit extends Cubit<CartState> {
               emit(GetCartEmpty());
             }
           } else {
+            cartId = result.data.id;
             emit(GetCartSuccess(result.data));
           }
         }
@@ -55,10 +60,27 @@ class CartCubit extends Cubit<CartState> {
     switch (result) {
       case Success<CartEntity>():
         {
+          
           emit(GetCartSuccess(result.data));
         }
         break;
       case Fail<CartEntity>():
+        emit(GetCartError(ErrorHandler.handle(result.exception!).message!));
+        break;
+    }
+  }
+  Future<void> deleteCartItems(String cartId) async {
+    emit(GetCartLoading());
+
+    var result = await deleteCartUseCase(cartId);
+
+    switch (result) {
+      case Success<DeleteCartResponse>():
+        {
+          emit(DeleteCartState());
+        }
+        break;
+      case Fail<DeleteCartResponse>():
         emit(GetCartError(ErrorHandler.handle(result.exception!).message!));
         break;
     }

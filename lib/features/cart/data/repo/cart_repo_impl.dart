@@ -4,6 +4,7 @@ import 'package:sadeem_task/core/api/api_result.dart';
 import 'package:sadeem_task/features/cart/data/data_source/remote/cart_remote.dart';
 import 'package:sadeem_task/features/cart/data/mapper/cart_mapper.dart';
 import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
+import 'package:sadeem_task/features/cart/data/model/response/delete_cart_response.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/request/update_cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/enttites/response/cart_entity.dart';
 import 'package:sadeem_task/features/cart/domain/repo/cart_repo.dart';
@@ -15,7 +16,7 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<DataResult<CartEntity>> getCartItems(String userId) async {
     return await executeApi(() async {
-      var response = await cartRemote.getCartItems(userId);
+      var response = await cartRemote.getCartItems("6");
 
       return CartMapper.singleCartToEntity(
         response.carts!.isNotEmpty
@@ -54,6 +55,14 @@ class CartRepoImpl implements CartRepo {
               totalQuantity: 0,
             ),
       );
+    });
+  }
+
+  @override
+  Future<DataResult<DeleteCartResponse>> deleteCartItems(String cartId) {
+    return executeApi(() async {
+      var response = await cartRemote.deleteCartItems(cartId);
+      return response;
     });
   }
 }
