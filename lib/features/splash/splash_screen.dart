@@ -18,7 +18,7 @@ class _SplashBodyState extends State<SplashBody> {
   @override
   void initState() {
     super.initState();
-    // goToHome();
+    goToHome();
   }
 
   @override
