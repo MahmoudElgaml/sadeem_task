@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -38,19 +39,21 @@ class ProductCart extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                        cartItem.image ?? "",
+                      child: CachedNetworkImage(
+                        imageUrl: cartItem.image ?? "",
                         fit: BoxFit.fill,
                         height: double.infinity,
+                        errorWidget:
+                            (context, url, error) => const Icon(
+                              Icons.error,
+                              color: AppColor.primaryColor,
+                            ),
                       ),
                     ),
                   ),
                 ),
                 const Gap(8),
-                Expanded(
-                  flex: 2,
-                  child: ProductDetail(cartItem: cartItem),
-                ),
+                Expanded(flex: 2, child: ProductDetail(cartItem: cartItem)),
               ],
             ),
           ),
@@ -69,12 +72,12 @@ class ProductCart extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                 Align(
+                Align(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: IncreaseDecreaseCartButton(
                     cartId: cartId,
-                    productId: cartItem.id??0,
-                    quantity: cartItem.quantity??0,
+                    productId: cartItem.id ?? 0,
+                    quantity: cartItem.quantity ?? 0,
                   ),
                 ),
               ],

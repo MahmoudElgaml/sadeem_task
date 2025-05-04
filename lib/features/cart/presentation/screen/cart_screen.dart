@@ -8,6 +8,8 @@ import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_string.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
 import 'package:sadeem_task/core/utils/component/dialog/dilog_utils.dart';
+import 'package:sadeem_task/core/utils/component/empty_cart.dart';
+import 'package:sadeem_task/core/utils/component/error_component.dart';
 import 'package:sadeem_task/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/cart_item.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/price_order_button.dart';
@@ -66,20 +68,11 @@ class CartScreen extends StatelessWidget {
                 ),
               );
             } else if (state is GetCartError) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(state.error, style: AppStyle.style18(context)),
-                  ),
-                ],
-              );
+              return ErrorComponent(message: state.error);
             } else if (state is GetCartEmpty) {
-              return Center(
-                child: Text(
-                  "Your cart is empty",
-                  style: AppStyle.style18(context),
-                ),
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Center(child: EmptyCart())],
               );
             } else if (state is GetCartSuccess) {
               return Column(
@@ -108,11 +101,9 @@ class CartScreen extends StatelessWidget {
                 ],
               );
             } else if (state is DeleteCartState) {
-              return Center(
-                child: Text(
-                  "Your cart is empty",
-                  style: AppStyle.style18(context),
-                ),
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Center(child: EmptyCart())],
               );
             } else {
               return Center(

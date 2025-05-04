@@ -9,6 +9,8 @@ class Assets{
   static const String imagesIncreaseIcon= "assets/images/increaseIcon.svg";
   static const String imagesDecreaseIocn= "assets/images/decreaseIocn.png";
   static const String imagesOutOfStock= "assets/images/out-of-stock.png";
+  static const String imagesEmptyCart= "assets/images/shopping.png";
+  static const String warning= "assets/images/warning.png";
 
 
 
