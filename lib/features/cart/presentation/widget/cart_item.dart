@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sadeem_task/core/utils/app_color.dart';
 import 'package:sadeem_task/core/utils/app_images.dart';
+import 'package:sadeem_task/features/cart/data/model/response/cart_dto.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
 import 'package:sadeem_task/features/cart/presentation/widget/cart_product_information.dart';
+import 'package:sadeem_task/features/cart/presentation/widget/increase_decrease_cart_button.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/IncreaseDecreaseOrderButton.dart';
 
 class ProductCart extends StatelessWidget {
-  const ProductCart({super.key});
-
+  const ProductCart({super.key, required this.cartItem});
+  final CartItemEntity cartItem;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -34,8 +37,8 @@ class ProductCart extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        Assets.productTest,
+                      child: Image.network(
+                        cartItem.image ?? "",
                         fit: BoxFit.fill,
                         height: double.infinity,
                       ),
@@ -43,12 +46,9 @@ class ProductCart extends StatelessWidget {
                   ),
                 ),
                 const Gap(8),
-                const Expanded(
+                Expanded(
                   flex: 2,
-                  child: FittedBox(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: ProductDetail(),
-                  ),
+                  child: ProductDetail(cartItem: cartItem),
                 ),
               ],
             ),
@@ -68,9 +68,11 @@ class ProductCart extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const Align(
+                 Align(
                   alignment: AlignmentDirectional.bottomEnd,
-                  child: IncreaseDecreaseOrderButton(),
+                  child: IncreaseDecreaseCartButton(
+                    quantity: cartItem.quantity??0,
+                  ),
                 ),
               ],
             ),

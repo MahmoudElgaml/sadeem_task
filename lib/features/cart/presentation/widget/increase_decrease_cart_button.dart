@@ -7,8 +7,8 @@ import 'package:sadeem_task/core/utils/app_style.dart';
 
 
 
-class IncreaseDecreaseOrderButton extends StatelessWidget {
-  const IncreaseDecreaseOrderButton({super.key, required this.quantity});
+class IncreaseDecreaseCartButton extends StatelessWidget {
+  const IncreaseDecreaseCartButton({super.key, required this.quantity});
  final  num quantity;
   @override
   Widget build(BuildContext context) {

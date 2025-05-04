@@ -2,41 +2,30 @@ import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 import 'package:sadeem_task/core/utils/app_style.dart';
+import 'package:sadeem_task/features/cart/domain/enttites/cart_entity.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
-
+  const ProductDetail({super.key, required this.cartItem});
+  final CartItemEntity cartItem;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Nike Air Jordon", style: AppStyle.style18(context)),
-        const Gap(13),
-        Row(
-          children: [
-            Container(
-              width: 15,
-              height: 15,
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-            ),
-            const Gap(8),
-            Text(
-              "Orange | Size: 40",
-              style: AppStyle.style18(
-                context,
-              ).copyWith(color: Color(0x9906004E)),
-            ),
-          ],
+        Text(
+          cartItem.title ?? "No Name",
+          style: AppStyle.style18(context),
+          maxLines: 1,
+          
         ),
-        const Gap(15),
+        const Gap(13),
+
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("EGP 3,500", style: AppStyle.style18(context))],
+          children: [
+            Text(cartItem.price.toString(), style: AppStyle.style18(context)),
+          ],
         ),
         const Gap(8),
       ],

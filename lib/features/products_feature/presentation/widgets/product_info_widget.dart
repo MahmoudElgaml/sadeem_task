@@ -89,7 +89,7 @@ class ProductInfoWidget extends StatelessWidget {
             ),
             const Spacer(),
 
-            const IncreaseDecreaseOrderButton(),
+            IncreaseDecreaseOrderButton(quantity: quantity),
           ],
         ),
         const Gap(16),

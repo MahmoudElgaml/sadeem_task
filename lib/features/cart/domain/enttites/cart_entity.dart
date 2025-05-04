@@ -33,6 +33,7 @@ class CartEntity {
       totalQuantity: totalQuantity ?? this.totalQuantity,
     );
   }
+  
 }
 
 class CartItemEntity {
@@ -77,6 +78,25 @@ class CartItemEntity {
       discountedTotal: discountedTotal ?? this.discountedTotal,
       image: image ?? this.image,
     );
+
+  }
+  num? get priceAfterDiscount {
+    if (price == null || discountPercentage == null) return price;
+
+    double discountAmount = price! * (discountPercentage! / 100);
+    return price! - discountAmount;
+  }
+
+  // Format the price with two decimal places
+  String get formattedPrice {
+    return price != null ? '\$${price!.toStringAsFixed(2)}' : 'N/A';
+  }
+
+  // Format the discounted price with two decimal places
+  String get formattedDiscountedPrice {
+    return priceAfterDiscount != null
+        ? '\$${priceAfterDiscount!.toStringAsFixed(2)}'
+        : 'N/A';
   }
 }
 
