@@ -1,8 +1,8 @@
 class CartDto {
   final List<Cart>? carts;
-  final int? total;
-  final int? skip;
-  final int? limit;
+  final num? total;
+  final num? skip;
+  final num? limit;
 
   CartDto({
     this.carts,
@@ -33,13 +33,13 @@ class CartDto {
 }
 
 class Cart {
-  final int? id;
+  final num? id;
   final List<CartProduct>? products;
-  final int? total;
-  final int? discountedTotal;
-  final int? userId;
-  final int? totalProducts;
-  final int? totalQuantity;
+  final num? total;
+  final num? discountedTotal;
+  final num? userId;
+  final num? totalProducts;
+  final num? totalQuantity;
 
   Cart({
     this.id,
@@ -79,10 +79,10 @@ class Cart {
 }
 
 class CartProduct {
-  final int? id;
+  final num? id;
   final String? title;
   final double? price;
-  final int? quantity;
+  final num? quantity;
   final double? total;
   final double? discountPercentage;
   final double? discountedTotal;
