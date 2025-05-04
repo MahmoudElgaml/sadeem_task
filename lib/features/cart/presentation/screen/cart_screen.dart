@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -70,15 +71,19 @@ class CartScreen extends StatelessWidget {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder:
-                          (context, index) => ProductCart(
-                            cartId: state.cartEntity.id??0,
-                            cartItem: state.cartEntity.items![index],
-                          ),
-                      separatorBuilder: (context, index) => const Gap(20),
-                      itemCount: state.cartEntity.items?.length ?? 0,
+                    child: FadeInUp(
+                      curve: Curves.linearToEaseOut,
+                      duration: const Duration(milliseconds: 900),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder:
+                            (context, index) => ProductCart(
+                              cartId: state.cartEntity.id ?? 0,
+                              cartItem: state.cartEntity.items![index],
+                            ),
+                        separatorBuilder: (context, index) => const Gap(20),
+                        itemCount: state.cartEntity.items?.length ?? 0,
+                      ),
                     ),
                   ),
 

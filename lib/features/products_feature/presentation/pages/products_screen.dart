@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return const Scaffold(
+    return  const Scaffold(
       backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16, right: 16),
@@ -31,7 +31,11 @@ class ProductsScreen extends StatelessWidget {
             SizedBox(height: 50),
             WelcomeSection(),
             Gap(16),
-            Expanded(child: WhiteContanier(child: ProductGridBuilder())),
+            Expanded(
+              child: WhiteContanier(
+                child: ProductGridBuilder(),
+              ),
+            ),
           ],
         ),
       ),

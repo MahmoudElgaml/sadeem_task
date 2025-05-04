@@ -21,16 +21,8 @@ class ProductInfoWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ExpandablePageView.builder(
-          itemCount: productEntity.images?.length ?? 0,
-          itemBuilder:
-              (context, index) => ProductDetailImage(
-                isOutOfStock: productEntity.isAvailable,
-                index: index,
-                image: productEntity.images ?? [],
-              ),
-        ),
-        const Gap(24),
+      
+        
         Row(
           children: [
             SizedBox(

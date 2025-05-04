@@ -15,7 +15,7 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<DataResult<CartEntity>> getCartItems(String userId) async {
     return await executeApi(() async {
-      var response = await cartRemote.getCartItems("6");
+      var response = await cartRemote.getCartItems(userId);
 
       return CartMapper.singleCartToEntity(
         response.carts!.isNotEmpty

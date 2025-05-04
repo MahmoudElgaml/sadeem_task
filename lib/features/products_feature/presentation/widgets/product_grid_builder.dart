@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,9 +9,7 @@ import 'package:sadeem_task/features/products_feature/presentation/cubit/product
 import 'package:sadeem_task/features/products_feature/presentation/widgets/product_item.dart';
 
 class ProductGridBuilder extends StatelessWidget {
-  const ProductGridBuilder({
-    super.key,
-  });
+  const ProductGridBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +36,41 @@ class ProductGridBuilder extends StatelessWidget {
                   notification.metrics.pixels >=
                       notification.metrics.maxScrollExtent * 0.88 &&
                   notification.depth == 0) {
-                context.read<ProductCubit>().getProducts(
-                  isLoadingMore: true,
-                );
+                context.read<ProductCubit>().getProducts(isLoadingMore: true);
               }
               return true;
             },
-            child: GridView.builder(
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 191 / 280,
-                  ),
-              itemBuilder: (context, index) {
-                if (index >= productsEntity.products!.length &&
-                    state is GetProductLoadingMore) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+            child: FadeInUp(
+              curve: Curves.linearToEaseOut,
+              duration: const Duration(milliseconds: 900),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 191 / 280,
+                ),
+                itemBuilder: (context, index) {
+                  if (index >= productsEntity.products!.length &&
+                      state is GetProductLoadingMore) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return InkWell(
+                    onTap: () {
+                      context.push(
+                        AppRoute.productDetail,
+                        extra: productsEntity.products![index],
+                      );
+                    },
+                    child: ProductItem(
+                      productEntity: productsEntity.products![index],
+                    ),
                   );
-                }
-                return InkWell(
-                  onTap: () {
-                    context.push(
-                      AppRoute.productDetail,
-                      extra: productsEntity.products![index],
-                    );
-                  },
-                  child: ProductItem(
-                    productEntity: productsEntity.products![index],
-                  ),
-                );
-              },
-              itemCount:
-                  (productsEntity.products?.length ?? 0) +
-                  (state is GetProductLoadingMore ? 2 : 0),
+                },
+                itemCount:
+                    (productsEntity.products?.length ?? 0) +
+                    (state is GetProductLoadingMore ? 2 : 0),
+              ),
             ),
           );
         } else {

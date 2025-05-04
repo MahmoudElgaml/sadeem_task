@@ -1,3 +1,5 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,6 +10,7 @@ import 'package:sadeem_task/features/products_feature/domain/entites/response/pr
 import 'package:sadeem_task/features/products_feature/presentation/widgets/pick_color_list.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/pick_size_list.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/price_addtocart_widget.dart';
+import 'package:sadeem_task/features/products_feature/presentation/widgets/product_detail_image.dart';
 import 'package:sadeem_task/features/products_feature/presentation/widgets/product_info_widget.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -39,12 +42,30 @@ class ProductDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProductInfoWidget(productEntity: productDetail),
-              const Gap(16),
-              const PickSizeList(),
-              const Gap(16),
-              const PickColorList(),
-              const Gap(48),
+              ExpandablePageView.builder(
+                itemCount: productDetail.images?.length ?? 0,
+                itemBuilder:
+                    (context, index) => ProductDetailImage(
+                      isOutOfStock: productDetail.isAvailable,
+                      index: index,
+                      image: productDetail.images ?? [],
+                    ),
+              ),
+              const Gap(24),
+              FadeInUp(
+                curve: Curves.linearToEaseOut,
+                duration: const Duration(milliseconds: 900),
+                child: Column(
+                  children: [
+                    ProductInfoWidget(productEntity: productDetail),
+                    const Gap(16),
+                    const PickSizeList(),
+                    const Gap(16),
+                    const PickColorList(),
+                    const Gap(48),
+                  ],
+                ),
+              ),
               PriceAddToCartWidget(productEntity: productDetail),
             ],
           ),
