@@ -74,6 +74,7 @@ class CartScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder:
                           (context, index) => ProductCart(
+                            cartId: state.cartEntity.id??0,
                             cartItem: state.cartEntity.items![index],
                           ),
                       separatorBuilder: (context, index) => const Gap(20),

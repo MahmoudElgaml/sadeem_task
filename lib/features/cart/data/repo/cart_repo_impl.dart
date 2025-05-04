@@ -43,8 +43,8 @@ class CartRepoImpl implements CartRepo {
         CartMapper.updateCartEntityToDto(cartData),
       );
       return CartMapper.singleCartToEntity(
-        response.carts!.isNotEmpty
-            ? response.carts!.first
+        response.products!.isNotEmpty
+            ? response
             : Cart(
               id: 0,
               products: [],

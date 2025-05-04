@@ -15,7 +15,7 @@ abstract class CartRemote {
   @GET(EndPoints.getCart)
   Future<CartDto> getCartItems(@Path('id') String userId);
   @PUT(EndPoints.updateCart)
-  Future<CartDto> updateCartItems(
+  Future<Cart> updateCartItems(
     @Path('id') String cartId,
     @Body() UpdateCartRequestDto updateCartRequestDto,
   );

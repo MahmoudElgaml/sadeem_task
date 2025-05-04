@@ -21,6 +21,8 @@ import '../../features/cart/data/data_source/remote/cart_remote.dart' as _i24;
 import '../../features/cart/data/repo/cart_repo_impl.dart' as _i234;
 import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
 import '../../features/cart/domain/use_case/get_cart_use_case.dart' as _i38;
+import '../../features/cart/domain/use_case/update_cart_use_case.dart'
+    as _i1012;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
 import '../../features/home_layout/presentation/cubit/home_layout_cubit.dart'
     as _i579;
@@ -64,12 +66,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i795.LoginRepoImpl(gh<_i77.LoginRemote>()));
     gh.factory<_i38.GetCartUseCase>(
         () => _i38.GetCartUseCase(gh<_i379.CartRepo>()));
+    gh.factory<_i1012.UpdateCartUseCase>(
+        () => _i1012.UpdateCartUseCase(gh<_i379.CartRepo>()));
     gh.factory<_i556.GetProductUseCase>(
         () => _i556.GetProductUseCase(gh<_i1073.ProductRepo>()));
     gh.factory<_i973.LoginUseCase>(
         () => _i973.LoginUseCase(gh<_i543.LoginRepo>()));
-    gh.factory<_i499.CartCubit>(
-        () => _i499.CartCubit(gh<_i38.GetCartUseCase>()));
+    gh.factory<_i499.CartCubit>(() => _i499.CartCubit(
+          gh<_i38.GetCartUseCase>(),
+          gh<_i1012.UpdateCartUseCase>(),
+        ));
     gh.factory<_i880.ProductCubit>(
         () => _i880.ProductCubit(gh<_i556.GetProductUseCase>()));
     gh.factory<_i69.LoginCubit>(

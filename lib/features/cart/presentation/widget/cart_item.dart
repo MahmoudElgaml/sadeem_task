@@ -11,8 +11,9 @@ import 'package:sadeem_task/features/cart/presentation/widget/increase_decrease_
 import 'package:sadeem_task/features/products_feature/presentation/widgets/IncreaseDecreaseOrderButton.dart';
 
 class ProductCart extends StatelessWidget {
-  const ProductCart({super.key, required this.cartItem});
+  const ProductCart({super.key, required this.cartItem, required this.cartId});
   final CartItemEntity cartItem;
+  final num cartId;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -71,6 +72,8 @@ class ProductCart extends StatelessWidget {
                  Align(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: IncreaseDecreaseCartButton(
+                    cartId: cartId,
+                    productId: cartItem.id??0,
                     quantity: cartItem.quantity??0,
                   ),
                 ),

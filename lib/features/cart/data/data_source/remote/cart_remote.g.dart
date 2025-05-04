@@ -57,7 +57,7 @@ class _CartRemote implements CartRemote {
   }
 
   @override
-  Future<CartDto> updateCartItems(
+  Future<Cart> updateCartItems(
     String cartId,
     UpdateCartRequestDto updateCartRequestDto,
   ) async {
@@ -66,7 +66,7 @@ class _CartRemote implements CartRemote {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(updateCartRequestDto.toJson());
-    final _options = _setStreamType<CartDto>(Options(
+    final _options = _setStreamType<Cart>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -83,9 +83,9 @@ class _CartRemote implements CartRemote {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CartDto _value;
+    late Cart _value;
     try {
-      _value = CartDto.fromJson(_result.data!);
+      _value = Cart.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
