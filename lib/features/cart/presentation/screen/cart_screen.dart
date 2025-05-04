@@ -51,8 +51,13 @@ class CartScreen extends StatelessWidget {
                 ),
               );
             } else if (state is GetCartError) {
-              return Center(
-                child: Text(state.error, style: AppStyle.style18(context)),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(state.error, style: AppStyle.style18(context)),
+                  ),
+                ],
               );
             } else if (state is GetCartEmpty) {
               return Center(

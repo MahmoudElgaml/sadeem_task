@@ -23,10 +23,20 @@ class PriceOrderButton extends StatelessWidget {
                 context,
               ).copyWith(color: const Color(0x9906004E)),
             ),
-            const Gap(12),
+
+            Text(
+              cartEntity.discountedTotal.toString(),
+              style: AppStyle.style18(context).copyWith(
+                color: AppColor.primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Text(
               cartEntity.total.toString(),
-              style: AppStyle.style18(context),
+
+              style: AppStyle.style18(
+                context,
+              ).copyWith(decoration: TextDecoration.lineThrough),
             ),
           ],
         ),
@@ -52,7 +62,7 @@ class PriceOrderButton extends StatelessWidget {
                     ),
                     const Gap(24),
                     Text(
-                     AppString.orderNow,
+                      AppString.orderNow,
                       style: AppStyle.textMedium20(
                         context,
                       ).copyWith(color: Colors.white),
