@@ -1,20 +1,28 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-
+import 'package:injectable/injectable.dart';
+@injectable
 class StorageToken {
   final _storage = const FlutterSecureStorage();
-  String? _token;
 
-  Future<String?> getToken() async {
-    _token = await _storage.read(key: "token");
-    return _token;
+  static const String _accessTokenKey = "access_token";
+  static const String _refreshTokenKey = "refresh_token";
+  Future<void> saveTokens(String? accessToken, String? refreshToken) async {
+    await _storage.write(key: _accessTokenKey, value: accessToken);
+    await _storage.write(key: _refreshTokenKey, value: refreshToken);
   }
-
-  setToken(String token) async {
-    await _storage.write(value: token, key: "token");
+  
+  // Added function to get access token
+  Future<String?> getAccessToken() async {
+    return await _storage.read(key: _accessTokenKey);
   }
-
-  deleteToken() async {
-    await _storage.delete(key: "token");
+  
+  // Added function to get refresh token
+  Future<String?> getRefreshToken() async {
+    return await _storage.read(key: _refreshTokenKey);
+  }
+  
+  // Optionally add methods to delete individual tokens
+  Future<void> deleteAccessToken() async {
+    await _storage.delete(key: _accessTokenKey);
   }
 }
