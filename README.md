@@ -15,14 +15,13 @@ A Flutter application that demonstrates modern app architecture and best practic
 - 📱 **Product Catalog**
   - Product grid with pagination
   - Product details view
-  - Product filtering and search
-  - Cached product images
+ 
   
 - 🛒 **Cart Management**
   - Add products to cart
   - Update product quantity
-  - Remove products
-  - Checkout process
+  - Remove All  products
+
 
 ## Architecture
 
